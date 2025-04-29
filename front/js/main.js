@@ -39,14 +39,14 @@
             .catch(err => {
                 console.error('API request failed:', err);
 
-                reportError(err);
-
-                document.querySelector('.fav-page').style.display = 'none';
-                if (window.location.href.startsWith("https://www.favbet.hr/")) {
-                    window.location.href = '/promocije/promocija/stub/';
-                } else {
-                    window.location.href = '/promos/promo/stub/';
-                }
+                // reportError(err);
+                //
+                // document.querySelector('.fav-page').style.display = 'none';
+                // if (window.location.href.startsWith("https://www.favbet.hr/")) {
+                //     window.location.href = '/promocije/promocija/stub/';
+                // } else {
+                //     window.location.href = '/promos/promo/stub/';
+                // }
 
                 return Promise.reject(err);
             });
@@ -61,8 +61,8 @@
 
     async function init() {
         let attempts = 0;
-        const maxAttempts = 50;
-        const attemptInterval = 200;
+        const maxAttempts = 20;
+        const attemptInterval = 50;
 
         function tryDetectUserId() {
             if (window.store) {
@@ -74,15 +74,13 @@
         }
 
         function quickCheckAndRender() {
-            // сюди всі функції які відповідають за рендер ui промки
             checkUserAuth();
+
         }
 
         const waitForUserId = new Promise((resolve) => {
             const interval = setInterval(() => {
                 tryDetectUserId();
-                if(userId) quickCheckAndRender();
-
                 if (userId || attempts >= maxAttempts) {
                     quickCheckAndRender();
                     clearInterval(interval);
@@ -113,40 +111,35 @@
             });
     }
 
-    // loadTranslations().then(init)
 
     function checkUserAuth() {
-        let loadTime = 200;
-        setTimeout(() =>{
-            if (userId) {
-                for (const unauthMes of unauthMsgs) {
-                    unauthMes.classList.add('hide');
-                }
-                return request(`/favuser/${userId}?nocache=1`)
-                    .then(res => {
-                        if (res.userid) {
-                            participateBtns.forEach(item => item.classList.add('hide'));
-                            redirectBtns.forEach(item => item.classList.remove('hide'));
-                        } else {
-                            participateBtns.forEach(item => item.classList.remove('hide'));
-                            redirectBtns.forEach(item => item.classList.add('hide'));
-                        }
-                        hideLoader()
-                    })
-            } else {
-                for (const info of choseCardsInfo) {
-                    info.classList.add('hide');
-                }
-                for (let participateBtn of participateBtns) {
-                    participateBtn.classList.add('hide');
-                }
-                for (const unauthMes of unauthMsgs) {
-                    unauthMes.classList.remove('hide');
-                }
-                hideLoader()
+        const loadTime = 200;
+
+        setTimeout(() => {
+            const showElements = (elements) => elements.forEach(el => el.classList.remove('hide'));
+            const hideElements = (elements) => elements.forEach(el => el.classList.add('hide'));
+
+            if (!userId) {
+                hideElements(participateBtns);
+                hideElements(redirectBtns);
+                showElements(unauthMsgs);
+                hideLoader();
                 return Promise.resolve(false);
             }
-        }, loadTime)
+
+            hideElements(unauthMsgs);
+
+            return request(`/favuser/${userId}?nocache=1`).then(res => {
+                if (res.userid) {
+                    hideElements(participateBtns);
+                    showElements(redirectBtns);
+                } else {
+                    showElements(participateBtns);
+                    hideElements(redirectBtns);
+                }
+                hideLoader();
+            });
+        }, loadTime);
     }
 
     function reportError(err) {
@@ -198,11 +191,6 @@
         element.classList.add(baseCssClass + locale);
     }
 
-    function translateKey(key, defaultVal) {
-        if (!key) {
-            return;
-        }
-        return i18nData[key] || defaultVal || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
-    }
+    // loadTranslations().then(init)
 
 })();
