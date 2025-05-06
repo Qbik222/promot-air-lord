@@ -16,7 +16,7 @@
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
 
-    let debug = true
+    let debug = false
 
     if (debug) hideLoader()
 
@@ -39,14 +39,14 @@
             .catch(err => {
                 console.error('API request failed:', err);
 
-                // reportError(err);
-                //
-                // document.querySelector('.fav-page').style.display = 'none';
-                // if (window.location.href.startsWith("https://www.favbet.hr/")) {
-                //     window.location.href = '/promocije/promocija/stub/';
-                // } else {
-                //     window.location.href = '/promos/promo/stub/';
-                // }
+                reportError(err);
+
+                document.querySelector('.fav-page').style.display = 'none';
+                if (window.location.href.startsWith("https://www.favbet.hr/")) {
+                    window.location.href = '/promocije/promocija/stub/';
+                } else {
+                    window.location.href = '/promos/promo/stub/';
+                }
 
                 return Promise.reject(err);
             });
