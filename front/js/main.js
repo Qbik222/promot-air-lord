@@ -367,7 +367,6 @@
             });
     }
 
-
     // loadTranslations().then(init) запуск ініту сторінки
 
 })();

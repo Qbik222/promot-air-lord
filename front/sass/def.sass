@@ -17,4 +17,34 @@ ul, li, p, h1, h2, h3
 
 *
 	box-sizing: border-box
-	
+
+// img costyl for snippets
+
+picture, img
+	display: block !important
+
+picture.light
+	display: block !important
+
+picture.dark
+	display: none !important
+
+picture.en
+	display: none !important
+picture.uk, picture.ro, picture.hr
+	display: block !important
+
+// dark
+body.dark
+	picture.light
+		display: none !important
+
+	picture.dark
+		display: block !important
+
+// en
+.fav-page.en
+	picture.en
+		display: block !important
+	picture.uk, picture.ro, picture.hr
+		display: none !important
