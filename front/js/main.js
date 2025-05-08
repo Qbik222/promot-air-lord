@@ -140,7 +140,7 @@
     }
 
     function loadTranslations() {
-        return fetch(`${apiURL}/new-translates/${locale}`).then(res => res.json())
+        return request(`/new-translates/${locale}`)
             .then(json => {
                 i18nData = json;
                 translate();
@@ -251,8 +251,9 @@
         resultsTableOther.innerHTML = '';
         if (!users?.length) return;
         const currentUser = users.find(user => user.userid === currentUserId);
-        const topUsers = users.slice(0, 10);
-        const isTopCurrentUser = currentUser && topUsers.some(user => user.userid === currentUserId);
+        const isTopCurrentUser = currentUser && users.slice(0, 10).some(user => user.userid === currentUserId);
+        const topUsersLength = !userId || isTopCurrentUser  ? 13 : 10;
+        const topUsers = users.slice(0, topUsersLength);
         topUsers.forEach(user => {
             displayUser(user, user.userid === currentUserId, resultsTable, topUsers, isTopCurrentUser, week);
         });
@@ -274,8 +275,8 @@
                 userRow.classList.add(`place${userPlace}`);
             }
 
-            if (highlight) {
-                userRow.classList.add('_your');
+            if (highlight || isCurrentUser && !neighbor) {
+                userRow.classList.add('you');
             } else if (neighbor) {
                 userRow.classList.add('_neighbor');
             }
@@ -283,9 +284,10 @@
             userRow.innerHTML = `
             <div class="table__row-item">
                 ${userPlace < 10 ? '0' + userPlace : userPlace}
+                ${isCurrentUser && !neighbor ? '<span class="you">' + translateKey("you") + '</span>' : ''}
             </div>
             <div class="table__row-item">
-                ${highlight ? userData.userid : maskUserId(userData.userid)}
+                ${isCurrentUser && !neighbor ? userData.userid : maskUserId(userData.userid)}
             </div>
             <div class="table__row-item">
                 ${userData.points}
@@ -310,6 +312,7 @@
             renderRow(user);
         }
     }
+
 
     function translateKey(key, defaultValue) {
         if (!key) {
