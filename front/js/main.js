@@ -144,16 +144,13 @@
             .then(json => {
                 i18nData = json;
                 translate();
-
-                var mutationObserver = new MutationObserver(function (mutations) {
-                    const shouldSkip = mutations.every(mutation => {
-                        return mutation.target.closest('.table');
-                    });
-                    if (shouldSkip) return;
+                const targetNode = document.getElementById("goals-or-zeros-leage");
+                const mutationObserver = new MutationObserver(function (mutations) {
+                    mutationObserver.disconnect();
                     translate();
+                    mutationObserver.observe(targetNode, { childList: true, subtree: true });
                 });
-
-                mutationObserver.observe(document.getElementById("yourPromoId"), {
+                mutationObserver.observe(targetNode, {
                     childList: true,
                     subtree: true
                 });
