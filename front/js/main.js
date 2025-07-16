@@ -176,16 +176,18 @@
 
             hideElements(unauthMsgs);
 
-            return request(`/favuser/${userId}?nocache=1`).then(res => {
-                if (res.userid) {
-                    hideElements(participateBtns);
-                    showElements(redirectBtns);
-                } else {
-                    showElements(participateBtns);
-                    hideElements(redirectBtns);
-                }
-                hideLoader();
-            });
+            if(userId){
+                return request(`/favuser/${userId}?nocache=1`).then(res => {
+                    if (res.userid) {
+                        hideElements(participateBtns);
+                        showElements(redirectBtns);
+                    } else {
+                        showElements(participateBtns);
+                        hideElements(redirectBtns);
+                    }
+                    hideLoader();
+                });
+            }
         }, loadTime);
     }
 

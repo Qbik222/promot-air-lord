@@ -22,22 +22,21 @@ ul, li, p, h1, h2, h3
 	button
 		all: unset
 		cursor: pointer
+	// img costyl for snippets
 
-// img costyl for snippets
+	picture, img
+		display: inline-block !important
 
-picture, img
-	display: inline-block !important
+	picture.light
+		display: inline-block !important
 
-picture.light
-	display: inline-block !important
+	picture.dark
+		display: none !important
 
-picture.dark
-	display: none !important
-
-picture.en
-	display: none !important
-picture.uk, picture.ro, picture.hr
-	display: inline-block !important
+	picture.en
+		display: none !important
+	picture.uk, picture.ro, picture.hr
+		display: inline-block !important
 
 // dark
 body.dark
