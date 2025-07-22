@@ -36,7 +36,15 @@
     const promoStartDate = new Date("2025-05-05T00:00:00");
     const weekDuration = 10;
 
-    const activeWeek = getActiveWeek(promoStartDate, weekDuration) || 1;
+    let isVerifiedUser = false;
+
+    let periodAmount = 2 // кількість періодів в акції, треба для кешування інфи з табли
+
+    let tableData = []
+    let activeWeek = getActiveWeek(promoStartDate, weekDuration) || 1;
+    // let activeWeek = 2
+
+    if (activeWeek > 2) activeWeek = 2
 
 
     const mainPage = document.querySelector(".fav-page"),
@@ -58,6 +66,7 @@
     let loaderBtn = false
 
     let locale = "en"
+    // let locale = sessionStorage.getItem("locale") || "uk"
 
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
@@ -69,6 +78,7 @@
     let i18nData = {};
     const translateState = true;
     let userId = null;
+    // let userId = Number(sessionStorage.getItem("userId")) ?? null
 
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
@@ -120,9 +130,18 @@
         }
 
         function quickCheckAndRender() {
-            checkUserAuth();
-
-        }
+            checkUserAuth()
+                .then(loadUsers)
+                .then(() =>{
+                    setTimeout(hideLoader, 300);
+                    document.querySelectorAll(".table__tabs-item").forEach((tab, i) =>{
+                        tab.classList.remove('active');
+                        if(i === activeWeek - 1) tab.classList.add('active');
+                    })
+                    // renderUsers(activeWeek, tableData);
+                    participateBtns.forEach(btn => btn.addEventListener('click', participate));
+                })
+            }
 
         const waitForUserId = new Promise((resolve) => {
             const interval = setInterval(() => {
@@ -144,13 +163,12 @@
             .then(json => {
                 i18nData = json;
                 translate();
-                const targetNode = document.getElementById("goals-or-zeros-leage");
                 const mutationObserver = new MutationObserver(function (mutations) {
                     mutationObserver.disconnect();
                     translate();
                     mutationObserver.observe(targetNode, { childList: true, subtree: true });
                 });
-                mutationObserver.observe(targetNode, {
+                mutationObserver.observe(document.getElementById("hardcoreTennis"), {
                     childList: true,
                     subtree: true
                 });
@@ -160,35 +178,38 @@
 
 
     function checkUserAuth() {
-        const loadTime = 200;
-
-        setTimeout(() => {
-            const showElements = (elements) => elements.forEach(el => el.classList.remove('hide'));
-            const hideElements = (elements) => elements.forEach(el => el.classList.add('hide'));
-
-            if (!userId) {
-                hideElements(participateBtns);
-                hideElements(redirectBtns);
-                showElements(unauthMsgs);
-                hideLoader();
-                return Promise.resolve(false);
+        console.log(userId)
+        if (userId) {
+            for (const unauthMes of unauthMsgs) {
+                unauthMes.classList.add('hide');
             }
-
-            hideElements(unauthMsgs);
-
-            if(userId){
-                return request(`/favuser/${userId}?nocache=1`).then(res => {
+            return request(`/favuser/${userId}?nocache=1`)
+                .then(res => {
                     if (res.userid) {
-                        hideElements(participateBtns);
-                        showElements(redirectBtns);
+                        participateBtns.forEach(item => item.classList.add('hide'));
+                        redirectBtns.forEach(item => item.classList.remove('hide'));
+                        isVerifiedUser = true;
+                        console.log(isVerifiedUser)
                     } else {
-                        showElements(participateBtns);
-                        hideElements(redirectBtns);
+                        participateBtns.forEach(item => item.classList.remove('hide'));
+                        redirectBtns.forEach(item => item.classList.add('hide'));
+                        isVerifiedUser = false;
                     }
-                    hideLoader();
-                });
+
+                })
+        } else {
+            for (let redirectBtn of redirectBtns) {
+                redirectBtn.classList.add('hide');
             }
-        }, loadTime);
+            for (let participateBtn of participateBtns) {
+                participateBtn.classList.add('hide');
+            }
+            for (const unauthMes of unauthMsgs) {
+                unauthMes.classList.remove('hide');
+            }
+
+            return Promise.resolve(false);
+        }
     }
 
     function reportError(err) {
@@ -224,6 +245,9 @@
                 console.log("translation works!")
             }
         }
+        if (locale === 'en') {
+            mainPage.classList.add('en');
+        }
         refreshLocalizedClass(mainPage);
     }
 
@@ -232,36 +256,66 @@
             return;
         }
         for (const lang of ['uk', 'en']) {
-            element.classList.remove(lang);
+            element.classList.remove(baseCssClass + lang);
         }
-        element.classList.add(locale);
+        element.classList.add(baseCssClass + locale);
     }
 
-    function renderUsers(week) {
-        request(`/users/${week}`)
-            .then(data => {
-                const users = data;
-                populateUsersTable(users, userId, week);
-            });
+    function renderUsers(weekNum, userData = []) {
+        weekNum = Number(weekNum);
+        userData = userData.find(week => {
+            return week.week === weekNum
+        }).users;
+
+        console.log(userData);
+
+        const currentUser = userData.find(user => user.userid === userId);
+
+        console.log(userId)
+        console.log(currentUser)
+        console.log(isVerifiedUser)
+
+        if(userId && !currentUser && isVerifiedUser){
+            userData = [...userData, {userid: userId, points: 0}]
+        }
+        console.log(userData);
+
+        populateUsersTable(userData, userId, weekNum, currentUser, isVerifiedUser);
     }
 
-    function populateUsersTable(users, currentUserId, week) {
+    function populateUsersTable(users, currentUserId, week, currentUser, isVerifiedUser) {
+
+        console.log(users);
         resultsTable.innerHTML = '';
         resultsTableOther.innerHTML = '';
         if (!users?.length) return;
-        const currentUser = users.find(user => user.userid === currentUserId);
+
         const isTopCurrentUser = currentUser && users.slice(0, 10).some(user => user.userid === currentUserId);
+
         const topUsersLength = !userId || isTopCurrentUser  ? 13 : 10;
+
         const topUsers = users.slice(0, topUsersLength);
+
+        // console.log(users);
         topUsers.forEach(user => {
             displayUser(user, user.userid === currentUserId, resultsTable, topUsers, isTopCurrentUser, week);
         });
-        if (!isTopCurrentUser && currentUser) {
+        // console.log(isTopCurrentUser)
+        console.log(isVerifiedUser)
+        if(isVerifiedUser && !currentUser) {
+            console.log('user verified');
             displayUser(currentUser, true, resultsTableOther, users, false, week);
         }
+        if (!isTopCurrentUser && currentUser) {
+            isVerifiedUser = false;
+            displayUser(currentUser, true, resultsTableOther, users, false, week);
+        }
+
+
     }
 
     function displayUser(user, isCurrentUser, table, users, isTopCurrentUser, week) {
+
         const renderRow = (userData, options = {}) => {
             const { highlight = false, neighbor = false } = options;
             const userRow = document.createElement('div');
@@ -289,7 +343,7 @@
                 ${isCurrentUser && !neighbor ? userData.userid : maskUserId(userData.userid)}
             </div>
             <div class="table__row-item">
-                ${userData.points}
+                ${Number(userData.points).toFixed(2)}
             </div>
             <div class="table__row-item">
                 ${prizeKey ? translateKey(prizeKey) : ' - '}
@@ -354,6 +408,7 @@
             body: JSON.stringify(params)
         }).then(res => res.json())
             .then(res => {
+                console.log(res);
                 loaderBtn = true
                 toggleClasses(participateBtns, "loader")
                 toggleTranslates(participateBtns, "loader")
@@ -364,11 +419,48 @@
                 }, 500)
                 setTimeout(()=>{
                     checkUserAuth()
+                    loadUsers("?nocache=1").then(res => {
+                        renderUsers(activeWeek, tableData)
+                    })
                 }, 1000)
 
+            })
+            .catch(err => {
+                console.error('API request failed:', err);
+
+                reportError(err);
+
+                document.querySelector('.fav-page').style.display = 'none';
+                if (window.location.href.startsWith("https://www.favbet.hr/")) {
+                    window.location.href = '/promocije/promocija/stub/';
+                } else {
+                    window.location.href = '/promos/promo/stub/';
+                }
+
+                return Promise.reject(err);
             });
     }
+    function loadUsers(parametr) {
+        const requests = [];
+        tableData.length = 0
 
-    // loadTranslations().then(init) запуск ініту сторінки
+        for (let i = 1; i <= periodAmount; i++) {
+            const week = i; // або будь-яка логіка для формування номера тижня
+            const req = request(`/users/${week}${parametr ? parametr : ""}`).then(data => {
+                console.log(data);
+                tableData.push({ week, users: data });
+            });
+
+            requests.push(req);
+        }
+
+        return Promise.all(requests)
+        .catch(error => {
+            console.error('Error loading users:', error);
+        });
+    }
+
+    // loadTranslations()
+    //     .then(init) // запуск ініту сторінки
 
 })();
