@@ -207,13 +207,10 @@ body
         th
           padding: 0 5px
       p, strong, a
-        font-size: 16px
-        line-height: 26px
+        font-size: 14px
+        line-height: 22px
         //font-family: $font-suisse-intl-reg
         color: $white
-        @media screen and (max-width: 600px)
-          font-size: 14px
-          line-height: 22px
       span
         //font-family: $font-suisse-intl-reg
         display: block
@@ -222,14 +219,22 @@ body
       td
         padding-left: 5px
 
+//contents styles
 
 .retreat1
-  padding-left: 30px
+  padding-left: 20px
   strong
     font-family: $font-suisse-intl-bold
     color: $white
+
+.retreat2
+  padding-left: 40px
+  strong
+    font-family: $font-suisse-intl-bold
+    color: $white
+
 .circle
-  padding-left: 35px
+  padding-left: 20px
   &:before
     content: ''
     width: 5px
@@ -237,9 +242,17 @@ body
     background: $white
     border-radius: 50%
     display: inline-block
-    margin: 0 4px 2px 0
+    margin: 0 8px 3px 0
 
+@media screen and (max-width: 600px)
+  .circle
+    padding-left: 15px
+  .retreat1
+    padding-left: 15px
+  .retreat2
+    padding-left: 30px
 
+//contents styles
 body.dark
   .spinner-overlay
     background: $black
