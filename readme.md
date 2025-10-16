@@ -109,3 +109,158 @@
     false - не спрацює
     потрібна на випадок якщо треба працювати з фронтом але актуального контенту в адмінці ще немає
 
+
+**************  API ROUTES ****************
+
+## 🧍 USERS API
+
+### **GET** `/favuser/:id`
+**Response:**
+```json
+{
+  "points": [number],
+  "points_started_": [number],
+  "userid": number,
+  "date": "Date"
+}
+```
+
+---
+
+### **GET** `/users`
+**Response:**
+```json
+[
+  {
+    "userid": number,
+    "points": number,
+    "date": "Date"
+  }
+]
+```
+
+---
+
+### **GET** `/users/winner`
+**Response:**
+```json
+{
+  "userid": "string"
+}
+```
+
+---
+
+### **GET** `/active`
+**Response:**
+```json
+[
+  {
+    "userid": number,
+    "pointsGained": number,
+    "date": "Date"
+  }
+]
+```
+
+---
+
+### **GET** `/users/:week`
+**Response:**
+```json
+[
+  {
+    "userid": number,
+    "points": number,
+    "date": "Date"
+  }
+]
+```
+
+---
+
+### **POST** `/user`
+**Body:**
+```json
+{
+  "userid": number
+}
+```  
+**Response:**
+```json
+{
+  "success": boolean
+}
+```
+
+---
+
+## 🌐 TRANSLATES API
+
+### **GET** `/new-translates`
+**Response:**
+```json
+[
+  {
+    "_id": "ObjectId",
+    "trKey": "string",
+    "locales": {
+      "en": "string",
+      "ua/hr/ro": "string"
+    }
+  }
+]
+```
+
+---
+
+### **GET** `/new-translates/:locale`
+**Response:**
+```json
+{
+  "[key]": "string"
+}
+```
+
+---
+
+### **POST** `/new-translates`
+**Body:**
+```json
+{
+  "key": "string",
+  "locales": {
+    "[key]": "string"
+  }
+}
+```  
+**Response:**
+```json
+{
+  "success": "string"
+}
+```
+
+---
+
+### **POST** `/new-translate/delete`
+**Body:**
+```json
+{
+  "key": "string"
+}
+```  
+**Response:**
+```json
+{}
+```
+
+---
+
+### **GET** `/new-translates/migrate`
+**Response:**
+```json
+{}
+```
+
+
