@@ -2,26 +2,258 @@
   display: none !important
 
 body.light
-  background: $blue
+  background: $blue-bg
 
 body
   overscroll-behavior: none
   -webkit-tap-highlight-color: transparent
-  background: $blue
+  background: $blue-bg
   img
     max-width: 100%
     height: auto
   & > *
     font-family: inherit
 
+.title
+  background: linear-gradient(248deg, #FFF 32.44%, #BFD2FF 64.37%)
+  background-clip: text
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  font-family: $font-fav-wide-bold
+  & > span
+    font-family: inherit
+  span:nth-child(2)
+    font-family: $font-fav-display-med
+
+.btn
+  display: flex
+  align-items: center
+  justify-content: center
+  background: $green
+  min-height: 50px
+  min-width: 150px
+  padding: 10px 20px
+  font-family: $font-roboto-cond-bold
+  font-size: 18px
+  border-radius: 6px
+  text-transform: uppercase
+  color: $blue
+  transition: all .5s ease-in-out
+  &:hover
+    cursor: pointer
+    background: $green-light
+
 .fav-page
-  background: $blue
+  background: $blue-bg
   display: flex
   flex-direction: column
   align-items: center
   overflow: hidden
+  padding-bottom: 30px
+  &__bottom
+    max-width: 768px
+    color: $white
+    font-family: $font-roboto-cond-reg
+    font-size: 12px
+    opacity: .5
+    text-align: center
+    margin-top: 15px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    gap: 15px
+    & > *
+      font-family: inherit
 
 
+
+.welcome
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 1280px
+  background: url("../img/welcome/bg.jpg") no-repeat 0 0/cover
+  height: 340px
+  @media screen and (max-width: 600px)
+    background: url("../img/welcome/bg-mob.jpg") no-repeat 0 0/cover
+  &__left
+    width: 470px
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    position: relative
+    overflow: hidden
+  &__right
+    position: relative
+    width: 400px
+    height: 100%
+    margin-left: 180px
+    &-emoji
+      position: absolute
+      max-width: 148px
+      right: 135px
+      bottom: 45px
+    &-cup
+      position: absolute
+      max-width: 135px
+      top: 25px
+      left: -105px
+    &-hand-with
+      position: absolute
+      right: 135px
+      top: 15px
+      max-width: 145px
+  &__title
+    max-width: 355px
+    z-index: 1
+    margin-bottom: -30px
+  &__btn
+    z-index: 2
+  &__amount
+    z-index: 1
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    margin-bottom: 10px
+    &-text
+      display: flex
+      align-items: flex-start
+      justify-content: center
+      white-space: nowrap
+      span:nth-child(1)
+        font-size: 86px
+      span:nth-child(2)
+        font-size: 56px
+        line-height: 80px
+        margin-left: 3px
+    &-hand
+      position: absolute
+      max-width: 120px
+      left: -15px
+      bottom: -90px
+  &__ball
+    &-magenta, &-blue
+      position: absolute
+      z-index: 0
+    &-magenta
+      max-width: 183px
+      left: 10px
+      bottom: -100px
+    &-blue
+      max-width: 202px
+      left: 50px
+      top: -125px
+
+
+.info
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 770px
+  padding: 20px 0 80px 0
+
+  &__top
+    color: $white
+    text-align: center
+    font-family: $font-roboto-cond-reg
+    margin-bottom: 55px
+  &__title
+    font-size: 32px
+  &__btn
+    z-index: 2
+  &__points
+    display: flex
+    align-items: center
+    justify-content: center
+    max-width: 545px
+    margin-top: 25px
+    position: relative
+    &-text
+      margin: 0 0 -50px -40px
+      position: relative
+      img, source
+        position: relative
+        z-index: 1
+      &::before
+        content: ""
+        position: absolute
+        z-index: 0
+        left: 51%
+        top: 42%
+        width: 140%
+        height: 140%
+        background: url("../img/info/shadow-text.png") no-repeat 0 0/cover
+        background-size: 100% 100%
+        transform: translate(-50%, -50%)
+
+    &-ball, &-sneaker, &-hand
+      position: absolute
+    &-ball
+      max-width: 173px
+      left: -135px
+      bottom: -95px
+    &-sneaker
+      max-width: 146px
+      right: -150px
+      top: -85px
+    &-hand
+      max-width: 115px
+      bottom: -95px
+      right: 45px
+
+
+.prize
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding-top: 30px
+  &__title
+    font-size: 32px
+    z-index: 2
+  &__subtitle
+    font-size: 18px
+    color: $white
+    font-family: $font-roboto-cond-reg
+    margin-top: 16px
+    z-index: 2
+  &__wrap
+    max-width: 605px
+    position: relative
+    z-index: 1
+    width: 100%
+    margin: -80px 0 -5px 0
+  &__hoodie
+    max-width: 315px
+    position: relative
+    img, picture
+      z-index: 1
+      position: relative
+    &::before
+      content: ""
+      background: url("../img/prize/prize-light.png") no-repeat 0 0/cover
+      background-size: 100% 100%
+      width: 100%
+      height: 100%
+      left: 50%
+      top: 50%
+      position: absolute
+      z-index: 0
+      transform: translate(-50%, -50%)
+  &__cup
+    position: absolute
+    max-width: 173px
+    top: 5px
+    left: -75px
+  &__emoji
+    position: absolute
+    max-width: 196px
+    right: -70px
+    bottom: -45px
 
 // loader
 
@@ -53,93 +285,154 @@ body
   flex-direction: column
   align-items: center
   justify-content: flex-start
-  width: 405px
-  min-height: 440px
+  width: 605px
+  //min-height: 580px
   z-index: 1
+  &__title
+    margin-top: 30px
+    font-size: 32px
+    white-space: nowrap
+    margin-bottom: 15px
   &__tabs
     display: flex
     align-items: center
     justify-content: center
-    gap: 6px
-    margin-bottom: 20px
+    gap: 24px
+    width: 100%
+    background: #0D1225
+    height: 35px
     &-item
       display: flex
       justify-content: center
       align-items: center
-      font-size: 16px
+      text-transform: uppercase
+      height: 100%
+      font-family: $font-roboto-cond-bold
+      font-size: 14px
+      color: $white
+      text-align: center
       &.active
-        background-color: $magenta
+        color: $magenta
+        position: relative
+        &::before
+          content: ""
+          position: absolute
+          bottom: 0px
+          left: 50%
+          transform: translateX(-50%)
+          width: 110%
+          height: 2px
+          background: $magenta
       &:hover
-        background: $magenta
+        color: $magenta
+        cursor: pointer
       span
         font-family: inherit
-        margin-right: .3em
 
   &__body
     width: 100%
     display: flex
     flex-direction: column
     align-items: center
-  &__row
-    display: flex
-    width: 100%
-    align-items: center
-    position: relative
-    &.you
+    background: #0D1225
+    max-height: 400px
+    overflow: auto
+    &::-webkit-scrollbar-thumb
+      width: 1px
       background: $white
+    &::-webkit-scrollbar
+      width: 1px
+      background: #0D1225
+
+  &__row
+    display: grid
+    grid-template-columns: repeat(var(--cols), 1fr)
+    gap: 8px
+    position: relative
+    width: 100%
+    min-height: 35px
+    max-height: 35px
+    &:not(:last-child)
+      border-bottom: 1px solid #19203D
+    &.you
+      background: $magenta
       .table__row-item
         color: $blue
+        &:nth-child(1)
+          position: relative
       .you
         //font-family: $font-favbet-text-reg
         text-transform: uppercase
         margin-left: 5px
+        position: absolute
+        right: 0px
+        top: 50%
+        transform: translate(0, -50%)
+        color: $blue
+        font-family: $font-roboto-cond-bold
+        font-size: 10px
     &-item
       display: flex
       align-items: center
       justify-content: center
       color: $white
-      //font-family: $font-suisse-intl-reg
-      font-size: 12px
+      font-family: $font-roboto-cond-bold
+      font-size: 14px
+      &:nth-child(1)
+        padding-right: 15px
     &.place1, &.place2, &.place3
-      .you
-        position: absolute
-        left: -7px
-        top: 50%
-        transform: translate(-100%, -50%)
-        color: white
       .table__row-item
+        position: relative
         &:nth-child(1)
           &::after
             content: ""
             display: block
             width: 20px
             height: 22px
-            margin-left: 5px
+            position: absolute
+            left: 15px
+            top: 50%
+            transform: translate(0%, -50%)
+      .you
+        position: absolute
+        right: 0px
+        top: 50%
+        transform: translate(0, -50%)
+        color: $blue
+        font-family: $font-roboto-cond-bold
+        font-size: 10px
     &.place1
       .table__row-item
         &:nth-child(1)
           &::after
-            background: url("../img/results/gold.png") no-repeat 0 0/contain
+            background: url("../img/table/gold.png") no-repeat 0 0/contain
     &.place2
       .table__row-item
         &:nth-child(1)
           &::after
-            background: url("../img/results/silver.png") no-repeat 0 0/contain
+            background: url("../img/table/silver.png") no-repeat 0 0/contain
     &.place3
       .table__row-item
         &:nth-child(1)
           &::after
-            background: url("../img/results/bronze.png") no-repeat 0 0/contain
+            background: url("../img/table/bronze.png") no-repeat 0 0/contain
   &__head
     width: 100%
     display: flex
     align-items: center
+    background: #19203D
+    .table__row-item
+      color: #BFBFBF
+      font-family: $font-roboto-cond-reg
+      font-size: 12px
+#tableSecond
+  max-height: 105px
 
 
 .drop
-  max-width: 605px
-  width: 100%
-  margin: 0 auto
+  max-width: 768px
+  width: 95%
+  margin: 12px auto 0 auto
   border-radius: 10px
   position: relative
   z-index: 5
@@ -147,15 +440,19 @@ body
     color: $white
     font-size: 10px
     line-height: 16px
-    //font-family: $font-suisse-intl-reg
+    font-family: $font-roboto-cond-reg
     text-align: center
     margin-bottom: 15px
   .dropdown[open] summary::before
     transform:  rotate(180deg)
+  summary::-webkit-details-marker
+    display: none
+    > summary
+      list-style: none
   summary
     list-style: none
-    padding: 8px 15px
-    //font-family: $font-suisse-intl-reg
+    padding: 4px 15px 12px 0
+    font-family: $font-roboto-cond-bold
     font-size: 14px
     cursor: pointer
     background-size: 100% 100%
@@ -163,15 +460,17 @@ body
     align-items: center
     justify-content: space-between
     color: $white
+    height: 33px
+    border-bottom: 1px solid #9299AF
     @media screen and (max-width: 600px)
       font-size: 14px
       line-height: 22px
     &::before
       content: ""
       display: block
-      min-width: 20px
+      min-width: 12px
       height: 12px
-      //background: url("../img/arrow-drop.png") no-repeat 0 0/contain
+      background: url("https://fav-prom.com/html/game-universe/img/arrow-drop.png") no-repeat 0 0/contain
       order: 2
 
   &-txt
@@ -179,7 +478,7 @@ body
     margin-top: 10px
     max-height: 350px
     overflow-y: auto
-    border: 1px solid $white
+    //border: 1px solid $white
     scrollbar-width: auto
     &::-webkit-scrollbar-thumb
       background: $green
@@ -192,13 +491,82 @@ body
       display: flex
       flex-direction: column
       gap: 15px
+      &.my-spins
+        display: flex
+        .no-spins
+          display: block
+          color: $white
+          text-align: center
+          font-family: $font-roboto-cond-reg
+          //font-family: $font-favbet-text-reg
+          font-size: 16px
+          line-height: 26px
+        .spins-row
+          display: flex
+          flex-direction: column
+          justify-content: space-between
+          width: 100%
+          gap: 2px
+          &-head
+            .content-date
+              min-width: 80px
+          &-item
+            .content-date
+              min-width: 60px
+          &-item, &-head
+            display: flex
+            justify-content: flex-start
+            padding: 7px 20px
+          //border-radius: 13px
+          &-item
+            .content-status
+              width: 30px
+              height: 30px
+              background: url("https://fav-prom.com/html/football-challange-2/img/undone.png") no-repeat 0 0/contain
+              &._done
+                background: url("https://fav-prom.com/html/football-challange-2/img/done.png") no-repeat 0 0/contain
+
+          &-head
+            background: transparent
+            opacity: .2
+          &-item
+            //background: rgba($white, .05)
+            display: flex
+            align-items: center
+            border-bottom: 1px solid #404C77
+          .content-date, .content-prize, .content-status
+            color: $white
+            font-family: $font-roboto-cond-reg
+            font-size: 14px
+            line-height: 22px
+            br
+              display: none
+            @media screen and (max-width: 600px)
+              &:nth-child(1)
+                font-size: 14px
+                line-height: 20px
+              &:nth-child(2)
+                font-size: 12px
+                line-height: 18px
+                text-align: right
+          .content-date
+            margin-right: 10px
+            //min-width: 60px
+            max-width: fit-content
+            padding: 0
+            @media screen and (max-width: 600px)
+              margin-right: 20px
+            @media screen and (max-width: 337px)
+              margin-right: 10px
+          .content-prize
+            margin-left: auto
       table
         border-spacing: 0
         border-color: $white
         tr, td
           border-color: $white
           color: $white
-          //font-family: $font-suisse-intl-reg
+        //font-family: $font-suisse-intl-reg
 
         td
           border: none
@@ -209,13 +577,13 @@ body
       p, strong, a
         font-size: 14px
         line-height: 22px
-        //font-family: $font-suisse-intl-reg
+        font-family: $font-roboto-cond-reg
         color: $white
       span
-        //font-family: $font-suisse-intl-reg
+        font-family: $font-roboto-cond-reg
         display: block
       tr,td
-        //font-family: $font-suisse-intl-reg
+        font-family: $font-roboto-cond-reg
       td
         padding-left: 5px
 
@@ -227,13 +595,13 @@ body
 .retreat1
   padding-left: 20px
   strong
-    font-family: $font-suisse-intl-bold
+    font-family: $font-roboto-cond-bold
     color: $white
 
 .retreat2
   padding-left: 40px
   strong
-    font-family: $font-suisse-intl-bold
+    font-family: $font-roboto-cond-bold
     color: $white
 
 .circle

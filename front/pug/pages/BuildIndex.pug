@@ -2,86 +2,232 @@
 .fav-page.loading
     .spinner-overlay
         .spinner
+    .welcome
+        .welcome__left
+            picture.welcome__title
+                source(media="(max-width: 600px)" srcset='img/welcome/title-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/title-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/welcome/title.png')
+                img(src="img/welcome/title.png" alt="Favbet")
+            .welcome__amount
+                .welcome__amount-text.title(data-translate="welcomeAmount") #[span 600 000 ₴] #[span *]
+                .welcome__amount-hand
+                    img(src="img/welcome/hand.png" alt="Favbet")
+            picture.welcome__ball-magenta
+                source(media="(max-width: 600px)" srcset='img/welcome/ball-magenta-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/ball-magenta-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/welcome/ball-magenta.png')
+                img(src="img/welcome/ball-magenta.png" alt="Favbet")
+            picture.welcome__ball-blue
+                source(media="(max-width: 600px)" srcset='img/welcome/ball-blue-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/ball-blue-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/welcome/ball-blue.png')
+                img(src="img/welcome/ball-blue.png" alt="Favbet")
+            a.welcome__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="air_lord_ua_23102025" data-button="auth_top") авторизуватись
+            button.welcome__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="air_lord_ua_23102025" data-button="takePart_top") взяти участь
+            a.welcome__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="air_lord_ua_23102025" data-button="playBtn_top") до подій
+        .welcome__right
+            .welcome__right-hand-with
+                img(src="img/welcome/hand-with.png" alt="Favbet")
+            .welcome__right-emoji
+                img(src="img/welcome/emoji.png" alt="Favbet")
+            .welcome__right-cup
+                img(src="img/welcome/cup.png" alt="Favbet")
+    .info
+        .info__top(data-translate="infoTop") З 23 жовтня до 31 грудня ставки на баскетбольні події в межах турніру НБА відкривають шанс на частку від 600 000 ₴, бонусні пропозиції у вигляді «Страховки ставки» та додаткові призи.
+        .info__title.title(data-transalte="infoTitle") Вищий коефіцієнт — більше
+        .info__points
+            picture.info__points-text
+                source(media="(max-width: 600px)" srcset='img/info/points-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/info/points-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/info/points.png')
+                img(src="img/info/points.png" alt="Favbet")
+            picture.info__points-ball
+                source(media="(max-width: 600px)" srcset='img/welcome/ball-magenta-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/ball-magenta-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/welcome/ball-magenta.png')
+                img(src="img/welcome/ball-magenta.png" alt="Favbet")
+            picture.info__points-sneaker
+                source(media="(max-width: 600px)" srcset='img/info/sneaker-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/info/sneaker-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/info/sneaker.png')
+                img(src="img/info/sneaker.png" alt="Favbet")
+            .info__points-hand
+                img(src="img/info/hand.png" alt="Favbet")
+        a.info__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="air_lord_ua_23102025" data-button="auth_top") авторизуватись
+        button.info__btn.btn.part-btn.hide(data-translate="joinBtn" data-promo="air_lord_ua_23102025" data-button="takePart_top") взяти участь
+        a.info__btn.btn.btn-join.hide(data-translate="playBtn" href="#" data-promo="air_lord_ua_23102025" data-button="playBtn_top") до подій
+    .drop
+        details.dropdown
+            summary(data-translate="detailsBtn") Деталі
+            .drop-txt
+                .drop-txt-list(data-translate="details")
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
     .table
+        .table__title.title(data-translate="tableTitle") Таблиця результатів
         .table__tabs
-            .table__tabs-item.active(data-week="1") #[span(data-translate="tableTab") Faza] 1
-            .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Faza] 2
+            .table__tabs-item.active(data-week="1") #[span(data-translate="tableTab") Етап] 1
+            .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Етап] 3
+            .table__tabs-item(data-week="3") #[span(data-translate="tableTab") Етап] 3
         .table__head
-            .table__row
-                .table__row-item(data-translate="tablePlace") [ MJESTO ]
-                .table__row-item(data-translate="tableId") [ ID ]
-                .table__row-item(data-translate="tablePoints") [ BODOVI ]
-                .table__row-item(data-translate="tablePrize") [ NAGRADA ]
-        .table__body#table
-            .table__row.place1.you
-                .table__row-item 01 #[span.you(data-translate="you") ti]
+            .table__row(style="--cols: 4")
+                .table__row-item(data-translate="tablePlace") Місце
+                .table__row-item(data-translate="tableId") ID гравця
+                .table__row-item(data-translate="tablePoints") Кількість балів
+                .table__row-item(data-translate="tablePrize") Приз
+        .table__body#table(style="--cols: 4")
+            .table__row(style="--cols: 4").place1.you
+                .table__row-item 01 #[span.you(data-translate="you") you]
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row.palce2
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4").place2
                 .table__row-item 02
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row.palce3
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4").place3
                 .table__row-item 03
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 04
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 05
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 06
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 07
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 08
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 09
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-            .table__row
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
                 .table__row-item 10
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
-        .table__body#tableOther
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
+            .table__row(style="--cols: 4")
+                .table__row-item 11
+                .table__row-item 4538***
+                .table__row-item 321312
+                .table__row-item 25 000 ₴
+            .table__row(style="--cols: 4")
+                .table__row-item 12
+                .table__row-item 4538***
+                .table__row-item 321312
+                .table__row-item 25 000 ₴
+            .table__row(style="--cols: 4")
+                .table__row-item 13
+                .table__row-item 4538***
+                .table__row-item 321312
+                .table__row-item 25 000 ₴
+            .table__row(style="--cols: 4")
+                .table__row-item 14
+                .table__row-item 4538***
+                .table__row-item 321312
+                .table__row-item 25 000 ₴
+        .table__body#tableOther(style="--cols: 4")
             .table__row
                 .table__row-item 38
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
             .table__row.you
-                .table__row-item 39 #[span.you(data-translate="you") ti]
+                .table__row-item 39 #[span.you(data-translate="you") you]
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
             .table__row
                 .table__row-item 40
                 .table__row-item 4538***
-                .table__row-item 32.9
-                .table__row-item 350 € #[span.table-coin]
+                .table__row-item 321312
+                .table__row-item 25 000 ₴ 
 
+
+    .prize
+        .prize__title.title(data-translate="prizeTitle") Додатковий приз
+        .prize__subtitle(data-translate="prizeSubtitle") Худі Jordan
+        .prize__wrap
+            picture.prize__hoodie
+                source(media="(max-width: 600px)" srcset='img/prize/hoodie-mob.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/prize/hoodie-mob.png')
+                source(media="(max-width: 1050px)" srcset='img/prize/hoodie.png')
+                img(src="img/prize/hoodie.png" alt="Favbet")
+            .prize__cup
+                img(src="img/prize/cup.png" alt="Favbet")
+            .prize__emoji
+                img(src="img/prize/emoji.png" alt="Favbet")
+    .table
+        .table__tabs
+            .table__tabs-item.active(data-week="1") #[span(data-translate="tableTab") Етап] 1
+            .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Етап] 2
+            .table__tabs-item(data-week="3") #[span(data-translate="tableTab") Етап] 2
+        .table__head
+            .table__row(style="--cols: 3")
+                .table__row-item(data-translate="tableId") ID гравця
+                .table__row-item(data-translate="tableCoef") Коефіцієнт ставки
+                .table__row-item(data-translate="tablePrize") Приз
+        .table__body#tableSecond
+            .table__row(style="--cols: 3")
+                .table__row-item 1
+                .table__row-item 4538***
+                .table__row-item 321312
+            .table__row(style="--cols: 3")
+                .table__row-item 1
+                .table__row-item 4538***
+                .table__row-item 321312
+            .table__row(style="--cols: 3")
+                .table__row-item 1
+                .table__row-item 4538***
+                .table__row-item 321312
+            .table__row(style="--cols: 3")
+                .table__row-item 1
+                .table__row-item 4538***
+                .table__row-item 321312
+            .table__row(style="--cols: 3")
+                .table__row-item 1
+                .table__row-item 4538***
+                .table__row-item 321312
+        .table__body#tableOtherSecond(style="--cols: 3")
+            .table__row(style="--cols: 3").you
+                .table__row-item 39 #[span.you(data-translate="you") you]
+                .table__row-item 4538***
+                .table__row-item 25 000 ₴
+
+
+    .fav-page__bottom(data-translate="underTableTxt")
+        p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+        p *під «СС» розуміється бонус у вигляді «Страховка ставки»
     .drop
         details.dropdown
-            summary(data-translate="rulseBtn")
+            summary(data-translate="rulseBtn") Правила та умови
             .drop-txt
                 .drop-txt-list(data-translate="rules")
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
+                    p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
