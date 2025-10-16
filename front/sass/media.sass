@@ -1,55 +1,161 @@
-@media screen and (max-width: 1050px)
-  ._title
-    font-size: 20px
-    line-height: 20px
-  ._container
-    max-width: 725px
-    min-width: 725px
-  .bet
-    &__text
-      font-size: 11px
-    &__title
-      padding: 2px 0 2px 7px
-    &__btn
-      &-item
-        font-size: 11px
-    &__column
-      max-width: 350px
-      &-name
-        margin-left: 4px
-        &-item
-          &:nth-child(1)
-            font-size: 12px
-          &:nth-child(2)
-            font-size: 10px
-      &-btn
-        font-size: 12px
-        padding: 4px
-        &::before
-          bottom: -14px
-          left: -9px
-      &-you
-        margin-right: 25px
-        font-size: 12px
-  .results
-    &__subtitle
-      max-width: 335px
-    &__top
-      scale: .85
-      transform-origin: bottom right
-      right: 10px
-      top: 20px
-    &__you
-      max-height: 50px
-      &-pers
-        max-width: 85px
-        margin: 0 2px -3px 10px
-    &__popup
+@media screen and (max-width: 1100px)
+  .welcome
+    background-position: -10px 0
+    &__left
+      margin-left: 100px
+    &__right
+      margin-left: 60px
+    &__ball
+      &-magenta
+        left: 80px
+    &__amount
+      &-hand
+        left: -30px
+        bottom: -100px
       &-text
-        font-size: 11px
-    &__prize
-      padding: 10px 17px 5px 0
-      &-amount
-        font-size: 20px
-      &-font
-        font-size: 17px
+        span:nth-child(1)
+          font-size: 62px
+        span:nth-child(2)
+          font-size: 28px
+
+@media screen and (max-width: 770px)
+  .info
+    transform: scale(.85)
+    margin: -30px 0
+
+@media screen and (max-width: 720px)
+  .welcome
+    margin-bottom: -20px
+    transform: scale(.9)
+    transform-origin: top center
+
+@media screen and (max-width: 650px)
+  .info
+    transform: scale(.75)
+    margin: -50px 0 -80px
+
+@media screen and (max-width: 600px)
+  .btn
+    min-width: 120px
+    padding: 10px 16px
+  .welcome
+    height: 200px
+    width: 760px
+    transform: scale(1)
+    margin: 0
+    background-position: -18px 0
+    &__left
+      width: 200px
+      margin-left: 90px
+    &__title
+      max-width: 141px
+      margin-bottom: -13px
+    &__amount
+      &-text
+        span:nth-child(1)
+          font-size: 34px
+          line-height: 34px
+        span:nth-child(2)
+          font-size: 14px
+          line-height: 14px
+          margin-left: 2px
+          margin-top: 3px
+      &-hand
+        max-width: 59px
+        left: -25px
+        bottom: -55px
+    &__ball
+      &-magenta
+        max-width: 92px
+        bottom: -50px
+        left: -10px
+      &-blue
+        max-width: 101px
+        top: -60px
+        left: -10px
+    &__right
+      margin-left: 10px
+      width: 250px
+      &-cup
+        top: 15px
+        left: -20px
+        max-width: 68px
+      &-emoji
+        max-width: 74px
+        right: 80px
+        bottom: 30px
+      &-hand-with
+        max-width: 72px
+        top: 25px
+        right: 85px
+  .info
+    transform: scale(1)
+    margin: 0
+    width: 360px
+    padding: 20px 0 30px 0
+    &__top
+      margin-bottom: 30px
+      font-size: 14px
+    &__title
+      font-size: 20px
+      br
+        display: block
+    &__points
+      max-width: 245px
+      margin-top: 10px
+      &-text
+        margin: 0 -10px -20px -30px
+      &-hand
+        max-width: 70px
+        bottom: -85px
+        right: -55px
+      &-sneaker
+        max-width: 72px
+        right: -75px
+        top: -40px
+      &-ball
+        max-width: 89px
+        left: -70px
+        bottom: -60px
+  .table
+    width: 360px
+    &__title
+      font-size: 20px
+    &__row
+      max-height: 51px
+      min-height: 51px
+    &__head
+      .table__row
+        max-height: 35px
+        min-height: 35px
+  .prize
+    &__title
+      font-size: 20px
+
+@media screen and (max-width: 360px)
+  .welcome
+    transform: scale(.9)
+    margin: 0 0 -20px 0
+  .info
+    transform: scale(.9)
+    margin: -20px 0
+  .table
+    transform: scale(.9)
+    margin: -20px 0 -15px 0
+  .prize
+    transform: scale(.9)
+    margin: -20px 0 0 0
+
+@media screen and (max-width: 325px)
+  .welcome
+    transform: scale(.85)
+    margin: 0 0 -40px 0
+  .info
+    transform: scale(.85)
+    margin: -20px 0 -40px 0
+  .table
+    transform: scale(.85)
+    margin: -25px 0 -20px 0
+  .prize
+    transform: scale(.85)
+    margin: -25px 0 0 0
