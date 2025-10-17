@@ -96,20 +96,26 @@ body
       max-width: 148px
       right: 135px
       bottom: 45px
+      animation: float 3.7s ease-in-out infinite
+
     &-cup
       position: absolute
       max-width: 135px
       top: 25px
       left: -105px
+      animation: float 3s ease-in-out infinite
     &-hand-with
       position: absolute
       right: 135px
       top: 15px
       max-width: 145px
+      animation: float 5s ease-in-out infinite
+
   &__title
     max-width: 355px
     z-index: 1
     margin-bottom: -30px
+    animation: scaleWelcomeTitle 3s ease-in-out infinite
   &__btn
     z-index: 2
   &__amount
@@ -124,6 +130,7 @@ body
       align-items: flex-start
       justify-content: center
       white-space: nowrap
+      z-index: 2
       span:nth-child(1)
         font-size: 86px
       span:nth-child(2)
@@ -135,18 +142,22 @@ body
       max-width: 120px
       left: -15px
       bottom: -90px
+      animation: welcomeHand 2s ease-in-out infinite
   &__ball
     &-magenta, &-blue
       position: absolute
       z-index: 0
+      transform-origin: center
     &-magenta
       max-width: 183px
       left: 10px
       bottom: -100px
+      animation: floatBall 7s linear infinite
     &-blue
       max-width: 202px
       left: 50px
       top: -125px
+      animation: floatBallReverse 5s linear infinite
 
 
 .info
@@ -178,6 +189,7 @@ body
     &-text
       margin: 0 0 -50px -40px
       position: relative
+      animation: scaleWelcomeTitle 3s ease-in-out infinite
       img, source
         position: relative
         z-index: 1
@@ -199,14 +211,17 @@ body
       max-width: 173px
       left: -135px
       bottom: -95px
+      animation: floatBall 10s linear infinite
     &-sneaker
       max-width: 146px
       right: -150px
       top: -85px
+      animation: float 4s ease-in-out infinite
     &-hand
       max-width: 115px
       bottom: -95px
       right: 45px
+      animation: infoHand 4s ease-in-out infinite
 
 
 .prize
@@ -224,6 +239,7 @@ body
     font-family: $font-roboto-cond-reg
     margin-top: 16px
     z-index: 2
+    animation: scaleWelcomeTitle 3s ease-in-out infinite
   &__wrap
     max-width: 605px
     position: relative
@@ -233,6 +249,7 @@ body
   &__hoodie
     max-width: 315px
     position: relative
+    animation: float 5s ease-in-out infinite
     img, picture
       z-index: 1
       position: relative
@@ -245,18 +262,21 @@ body
       left: 50%
       top: 50%
       position: absolute
-      z-index: 0
+      z-index: 1
       transform: translate(-50%, -50%)
   &__cup
     position: absolute
     max-width: 173px
     top: 5px
     left: -75px
+    animation: float 6s ease-in-out infinite
   &__emoji
     position: absolute
     max-width: 196px
     right: -70px
     bottom: -45px
+    z-index: 0
+    animation: float 4s ease-in-out infinite
 
 // loader
 
@@ -648,3 +668,53 @@ body.dark
     transform: scale(.8)
   100%
     transform: scale(1)
+
+@keyframes scaleWelcomeTitle
+  0%, 100%
+    transform: scale(1)
+  50%
+    transform: scale(1.1)
+
+@keyframes welcomeHand
+  0%, 100%
+    transform: translate(3px, -6px)
+  50%
+    transform: translate(-3px, 6px)
+
+@keyframes infoHand
+  0%, 100%
+    transform: translate(-40px, -6px)
+  50%
+    transform: translate(-20px, 6px)
+
+@keyframes floatBall
+  0%
+    transform: rotate(0deg) translateY(0)
+  25%
+    transform: rotate(90deg) translateY(-10px)
+  50%
+    transform: rotate(180deg) translateY(0)
+  75%
+    transform: rotate(270deg) translateY(10px)
+  100%
+    transform: rotate(360deg) translateY(0)
+
+
+@keyframes floatBallReverse
+  0%
+    transform: rotate(0deg) translateY(0)
+  25%
+    transform: rotate(-90deg) translateY(-10px)
+  50%
+    transform: rotate(-180deg) translateY(0)
+  75%
+    transform: rotate(-270deg) translateY(10px)
+  100%
+    transform: rotate(-360deg) translateY(0)
+
+@keyframes float
+  0%, 100%
+    transform: translateY(5px)
+  50%
+    transform: translateY(-5px)
+
