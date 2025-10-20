@@ -43,7 +43,7 @@ button.menu-btn menu
                 img(src="img/welcome/cup.png" alt="Favbet")
     .info
         .info__top(data-translate="infoTop") З 23 жовтня до 31 грудня ставки на баскетбольні події в межах турніру НБА відкривають шанс на частку від 600 000 ₴, бонусні пропозиції у вигляді «Страховки ставки» та додаткові призи.
-        .info__title.title(data-transalte="infoTitle") Вищий <br/> коефіцієнт — більше
+        .info__title.title(data-translate="infoTitle") Вищий <br/> коефіцієнт — більше
         .info__points
             picture.info__points-text.uk
                 source(media="(max-width: 600px)" srcset='img/info/points-mob.png')
@@ -82,9 +82,9 @@ button.menu-btn menu
                     p *Загальний призовий фонд Акції «Володар повітря» складається з 600 000 Бонусів у вигляді електронних грошових замінників, призів у вигляді бонусної пропозиції «Страховки ставки» на загальну суму в 61 500 Бонусів у вигляді  електронних грошових замінників та визначених фізичних призів. Період дії акції – з 12:00 23.10.2025 до 23:59 31.12.2025 року.
     .table
         .table__title.title(data-translate="tableTitle") Таблиця результатів
-        .table__tabs
+        .table__tabs(data-table="main")
             .table__tabs-item.active(data-week="1") #[span(data-translate="tableTab") Етап] 1
-            .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Етап] 3
+            .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Етап] 2
             .table__tabs-item(data-week="3") #[span(data-translate="tableTab") Етап] 3
         .table__head
             .table__row(style="--cols: 4")
@@ -93,94 +93,7 @@ button.menu-btn menu
                 .table__row-item(data-translate="tablePoints") Кількість балів
                 .table__row-item(data-translate="tablePrize") Приз
         .table__body#table(style="--cols: 4")
-            .table__row(style="--cols: 4").place1.you
-                .table__row-item 01 #[span.you(data-translate="you") you]
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4").place2
-                .table__row-item 02
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4").place3
-                .table__row-item 03
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 04
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 05
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 06
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 07
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 08
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 09
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 10
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row(style="--cols: 4")
-                .table__row-item 11
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴
-            .table__row(style="--cols: 4")
-                .table__row-item 12
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴
-            .table__row(style="--cols: 4")
-                .table__row-item 13
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴
-            .table__row(style="--cols: 4")
-                .table__row-item 14
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴
         .table__body#tableOther(style="--cols: 4")
-            .table__row
-                .table__row-item 38
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row.you
-                .table__row-item 39 #[span.you(data-translate="you") you]
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-            .table__row
-                .table__row-item 40
-                .table__row-item 4538***
-                .table__row-item 321312
-                .table__row-item 25 000 ₴ 
-
-
     .prize
         .prize__title.title(data-translate="prizeTitle") Додатковий приз
         .prize__subtitle(data-translate="prizeSubtitle") Худі Jordan
@@ -195,7 +108,7 @@ button.menu-btn menu
             .prize__emoji
                 img(src="img/prize/emoji.png" alt="Favbet")
     .table
-        .table__tabs
+        .table__tabs(data-table="second")
             .table__tabs-item.active(data-week="1") #[span(data-translate="tableTab") Етап] 1
             .table__tabs-item(data-week="2") #[span(data-translate="tableTab") Етап] 2
             .table__tabs-item(data-week="3") #[span(data-translate="tableTab") Етап] 2
@@ -204,32 +117,8 @@ button.menu-btn menu
                 .table__row-item(data-translate="tableId") ID гравця
                 .table__row-item(data-translate="tableCoef") Коефіцієнт ставки
                 .table__row-item(data-translate="tablePrize") Приз
-        .table__body#tableSecond
-            .table__row(style="--cols: 3")
-                .table__row-item 1
-                .table__row-item 4538***
-                .table__row-item 321312
-            .table__row(style="--cols: 3")
-                .table__row-item 1
-                .table__row-item 4538***
-                .table__row-item 321312
-            .table__row(style="--cols: 3")
-                .table__row-item 1
-                .table__row-item 4538***
-                .table__row-item 321312
-            .table__row(style="--cols: 3")
-                .table__row-item 1
-                .table__row-item 4538***
-                .table__row-item 321312
-            .table__row(style="--cols: 3")
-                .table__row-item 1
-                .table__row-item 4538***
-                .table__row-item 321312
-        .table__body#tableOtherSecond(style="--cols: 3")
-            .table__row(style="--cols: 3").you
-                .table__row-item 39 #[span.you(data-translate="you") you]
-                .table__row-item 4538***
-                .table__row-item 25 000 ₴
+        .table__body#secondTable
+        .table__body#secondTableOther(style="--cols: 3")
 
 
         a.table__btn.btn.unauth-msg(data-translate="authBtn" href="/login" data-promo="air_lord_ua_23102025" data-button="auth_bottom") взяти участь

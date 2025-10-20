@@ -2,56 +2,25 @@
 
     const apiURL = 'https://fav-prom.com/api_lord_of_the_air'
 
-    const getActiveWeek = (promoStartDate, weekDuration) => {
-        const currentDate = new Date();
-        let weekDates = [];
-
-        const Day = 24 * 60 * 60 * 1000;
-        const Week = weekDuration * Day;
-
-        const formatDate = (date) =>
-            `${date.getDate().toString().padStart(2, "0")}.${(date.getMonth() + 1).toString().padStart(2, "0")}`;
-
-        const calculateWeekPeriod = (weekIndex) => {
-            const baseStart = promoStartDate.getTime();
-            const start = new Date(baseStart + weekIndex * Week);
-            let end = new Date(start.getTime() + (weekDuration * Day - 1));
-            return { start, end };
-        };
-
-        let activeWeekIndex = null;
-
-        // Перевірка поточного тижня
-        for (let i = 0; i < 10; i++) { // Обмежуємо 10 тижнями (якщо потрібно більше, просто змініть лічильник)
-            const { start, end } = calculateWeekPeriod(i);
-            if (currentDate >= start && currentDate <= end) {
-                activeWeekIndex = i + 1;
-                break;
-            }
-        }
-
-        return activeWeekIndex;
-    };
-
-    const promoStartDate = new Date("2025-05-05T00:00:00");
-    const weekDuration = 10;
-
     let isVerifiedUser = false;
 
-    let periodAmount = 2 // кількість періодів в акції, треба для кешування інфи з табли
-
     let tableData = []
-    let activeWeek = getActiveWeek(promoStartDate, weekDuration) || 1;
-    // let activeWeek = 2
+    let activeWeek = null
 
-    if (activeWeek > 2) activeWeek = 2
-
+    let periodAmount = 3
 
     const mainPage = document.querySelector(".fav-page"),
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.part-btn'),
         redirectBtns = document.querySelectorAll('.btn-join'),
-        loader = document.querySelector(".spinner-overlay")
+        loader = document.querySelector(".spinner-overlay"),
+        resultsTable = document.querySelector("#table"),
+        resultsTableOther = document.querySelector("#tableOther"),
+        secondTable = document.querySelector("#secondTable"),
+        secondTableOther = document.querySelector("#secondTableOther"),
+        tabs = document.querySelectorAll('.table__tabs-item');
+        // tabsMain = document.querySelector("[data-tabs='main']").querySelectorAll(".table__tabs-item"),
+        // tabsSecond = document.querySelector("[data-tabs='main']").querySelectorAll(".table__tabs-item")
 
     const ukLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
@@ -134,12 +103,35 @@
                 .then(loadUsers)
                 .then(() =>{
                     setTimeout(hideLoader, 300);
-                    document.querySelectorAll(".table__tabs-item").forEach((tab, i) =>{
-                        tab.classList.remove('active');
-                        if(i === activeWeek - 1) tab.classList.add('active');
-                    })
-                    // renderUsers(activeWeek, tableData);
-                    participateBtns.forEach(btn => btn.addEventListener('click', participate));
+                    tabs.forEach(item => {
+                        item.classList.remove('active')
+                        const num = Number(item.getAttribute('data-week'))
+                        if(num === activeWeek) item.classList.add('active');
+                        if(num > activeWeek) item.classList.add('lock');
+                    });
+
+                    renderUsers(activeWeek, tableData);
+                    document.addEventListener('click', e => {
+                        if (e.target.closest('.part-btn')) participate(e);
+
+                        if (e.target.closest(".table__tabs-item")){
+                            const tab = e.target.closest(".table__tabs-item")
+                           const week = Number(tab.getAttribute('data-week'));
+
+                            if(week > activeWeek || week === activeWeek) return
+
+                           tabs.forEach(item => {
+                               item.classList.remove('active')
+                               const num = Number(item.getAttribute('data-week'))
+                               if(num === week) item.classList.add('active');
+                           });
+
+                           renderUsers(week, tableData);
+                           tab.classList.add('active');
+
+                        }
+                    });
+                    // participateBtns.forEach(btn => btn.addEventListener('click', participate));
                 })
             }
 
@@ -254,55 +246,79 @@
 
     function renderUsers(weekNum, userData = []) {
         weekNum = Number(weekNum);
-        userData = userData.find(week => {
-            return week.week === weekNum
-        }).users;
+        console.log(userData)
+        const weekObj = userData.find(w => w.week === weekNum);
+        if (!weekObj || !weekObj.data || !Array.isArray(weekObj.data.users)) {
+            console.error('Невірна структура даних');
+            return;
+        }
+
+        const isStageEnded = userData.isStageEnded
+
+        userData = weekObj.data.users;
+
+        const winnerAdditionalPrize = userData.find(u => {
+            if(u.winner === true){
+                return u
+            }
+        });
 
         console.log(userData);
 
+
+
+
+
+        console.log(winnerAdditionalPrize);
+
         const currentUser = userData.find(user => user.userid === userId);
 
-        console.log(userId)
-        console.log(currentUser)
-        console.log(isVerifiedUser)
+        // console.log(userId)
+        // console.log(currentUser)
+        // console.log(isVerifiedUser)
 
         if(userId && !currentUser && isVerifiedUser){
             userData = [...userData, {userid: userId, points: 0}]
         }
         console.log(userData);
 
-        populateUsersTable(userData, userId, weekNum, currentUser, isVerifiedUser);
+        populateUsersTable(userData, userId, weekNum, currentUser, isVerifiedUser, isStageEnded, winnerAdditionalPrize);
     }
 
-    function populateUsersTable(users, currentUserId, week, currentUser, isVerifiedUser) {
+    function populateUsersTable(users, currentUserId, week, currentUser, isVerifiedUser, isStageEnded, winnerAdditionalPrize) {
 
         console.log(users);
         resultsTable.innerHTML = '';
         resultsTableOther.innerHTML = '';
+        secondTableOther.innerHTML = '';
+        secondTable.innerHTML = '';
         if (!users?.length) return;
 
         const isTopCurrentUser = currentUser && users.slice(0, 10).some(user => user.userid === currentUserId);
 
-        const topUsersLength = !userId || isTopCurrentUser  ? 13 : 10;
+        const topUsersLength = !userId || isTopCurrentUser  ? 10 : 10;
 
         const topUsers = users.slice(0, topUsersLength);
 
-        // console.log(users);
         topUsers.forEach(user => {
             displayUser(user, user.userid === currentUserId, resultsTable, topUsers, isTopCurrentUser, week);
         });
-        // console.log(isTopCurrentUser)
-        console.log(isVerifiedUser)
         if(isVerifiedUser && !currentUser) {
-            console.log('user verified');
             displayUser(currentUser, true, resultsTableOther, users, false, week);
         }
         if (!isTopCurrentUser && currentUser) {
-            isVerifiedUser = false;
             displayUser(currentUser, true, resultsTableOther, users, false, week);
         }
-
-
+        if (winnerAdditionalPrize) {
+            if(currentUser){
+                displaySecondUser(winnerAdditionalPrize, true , secondTableOther, [winnerAdditionalPrize], true)
+            }else{
+                displaySecondUser(winnerAdditionalPrize, false , secondTableOther, [winnerAdditionalPrize], false)
+            }
+        }
+        else {
+            secondTable.innerHTML = `<div class="table__row"> ${translateKey(isStageEnded ? "noWinnerHoodie" : "waitingWinnerHoodie")} </div>`
+        }
     }
 
     function displayUser(user, isCurrentUser, table, users, isTopCurrentUser, week) {
@@ -357,6 +373,41 @@
         }
     }
 
+    function displaySecondUser(user, isCurrentUser, table, users, isTopCurrentUser) {
+
+        const renderRow = (userData, options = {}) => {
+            const { highlight = false, neighbor = false } = options;
+            const userRow = document.createElement('div');
+            userRow.classList.add('table__row');
+            const prizeKey = "prize_hoodie"
+
+            if (highlight || isCurrentUser && !neighbor) {
+                userRow.classList.add('you');
+            } else if (neighbor) {
+                userRow.classList.add('_neighbor');
+            }
+
+            userRow.innerHTML = `
+            <div class="table__row-item">
+                ${isCurrentUser && !neighbor ? userData.userid : maskUserId(userData.userid)}
+                ${isCurrentUser && !neighbor ? '<span class="you">' + translateKey("you") + '</span>' : ''}
+            </div>
+            <div class="table__row-item">
+                ${Number(userData.coefIn).toFixed(2)}
+            </div>
+            <div class="table__row-item">
+                ${prizeKey ? translateKey(prizeKey) : " - "}
+            </div>
+        `;
+
+            table.append(userRow);
+        };
+        if (isCurrentUser && !isTopCurrentUser) {
+            renderRow(user, { highlight: true });
+        } else {
+            renderRow(user);
+        }
+    }
 
     function translateKey(key, defaultValue) {
         if (!key) {
@@ -373,16 +424,18 @@
     }
 
     function getPrizeTranslationKey(place, week) {
-        if (place <= 3) return `prize_${week}-${place}`;
-        if (place <= 10) return `prize_${week}-4-10`;
-        if (place <= 25) return `prize_${week}-11-25`;
-        if (place <= 50) return `prize_${week}-26-50`;
-        if (place <= 75) return `prize_${week}-51-75`;
-        if (place <= 100) return `prize_${week}-76-100`;
-        if (place <= 125) return `prize_${week}-101-125`;
-        if (place <= 150) return `prize_${week}-126-150`;
-        if (place <= 175) return `prize_${week}-151-175`;
-        if (place <= 200) return `prize_${week}-176-200`;
+        week = 1 // в цьому проміку для всіх стейджів однакові призи тому week = 1
+        if (place <= 12) return `prize_${week}-${place}`;
+        if (place <= 16) return `prize_${week}-13-16`;
+        if (place <= 19) return `prize_${week}-17-19`;
+        if (place <= 29) return `prize_${week}-20-29`;
+        if (place <= 40) return `prize_${week}-30-40`;
+        if (place <= 80) return `prize_${week}-41-80`;
+        if (place <= 113) return `prize_${week}-81-113`;
+        if (place <= 130) return `prize_${week}-114-130`;
+        if (place <= 150) return `prize_${week}-131-150`;
+        if (place <= 170) return `prize_${week}-151-170`;
+        if (place <= 200) return `prize_${week}-171-200`;
     }
 
     function participate() {
@@ -431,6 +484,7 @@
                 return Promise.reject(err);
             });
     }
+
     function loadUsers(parametr) {
         const requests = [];
         tableData.length = 0
@@ -439,7 +493,11 @@
             const week = i; // або будь-яка логіка для формування номера тижня
             const req = request(`/users/${week}${parametr ? parametr : ""}`).then(data => {
                 console.log(data);
-                tableData.push({ week, users: data });
+                tableData.push({ week, data: data });
+                if(!activeWeek){
+                    activeWeek = data.activeStageNumber
+                }
+
             });
 
             requests.push(req);

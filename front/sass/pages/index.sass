@@ -360,9 +360,14 @@ body
       font-size: 14px
       color: $white
       text-align: center
+      &.lock
+        pointer-events: none
+      span
+        margin-right: .2em
       &.active
         color: $magenta
         position: relative
+        pointer-events: none
         &::before
           content: ""
           position: absolute
@@ -402,6 +407,10 @@ body
     width: 100%
     min-height: 35px
     max-height: 35px
+    font-family: $font-roboto-cond-bold
+    font-size: 15px
+    text-align: center
+    color: $white
     &:not(:last-child)
       border-bottom: 1px solid #19203D
     &.you
