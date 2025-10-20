@@ -1,6 +1,6 @@
 (function () {
 
-    const apiURL = 'https://fav-prom.com/api_your_promo'
+    const apiURL = 'https://fav-prom.com/api_lord_of_the_air'
 
     const getActiveWeek = (promoStartDate, weekDuration) => {
         const currentDate = new Date();
@@ -65,20 +65,20 @@
 
     let loaderBtn = false
 
-    let locale = "en"
-    // let locale = sessionStorage.getItem("locale") || "uk"
+    // let locale = "en"
+    let locale = sessionStorage.getItem("locale") || "uk"
 
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
 
-    let debug = true
+    let debug = false
 
     if (debug) hideLoader()
 
     let i18nData = {};
     const translateState = true;
-    let userId = null;
-    // let userId = Number(sessionStorage.getItem("userId")) ?? null
+    // let userId = null;
+    let userId = Number(sessionStorage.getItem("userId")) ?? null
 
     const request = function (link, extraOptions) {
         return fetch(apiURL + link, {
@@ -159,20 +159,10 @@
     }
 
     function loadTranslations() {
-        return request(`/new-translates/${locale}`)
+        return request(`/new-translates/${locale}?nocache=1`)
             .then(json => {
                 i18nData = json;
                 translate();
-                const mutationObserver = new MutationObserver(function (mutations) {
-                    mutationObserver.disconnect();
-                    translate();
-                    mutationObserver.observe(targetNode, { childList: true, subtree: true });
-                });
-                mutationObserver.observe(document.getElementById("hardcoreTennis"), {
-                    childList: true,
-                    subtree: true
-                });
-
             });
     }
 
@@ -252,6 +242,7 @@
     }
 
     function refreshLocalizedClass(element) {
+        let baseCssClass = ""
         if (!element) {
             return;
         }
@@ -460,7 +451,37 @@
         });
     }
 
-    // loadTranslations()
-    //     .then(init) // запуск ініту сторінки
+    loadTranslations()
+        .then(init) // запуск ініту сторінки
+
+    // TEST
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".menu-btn")?.addEventListener("click", () => {
+            document.querySelector(".menu-test")?.classList.toggle("hide");
+        });
+    });
+
+    const lngBtn = document.querySelector(".lng-btn")
+
+    lngBtn.addEventListener("click", () => {
+        if (sessionStorage.getItem("locale")) {
+            sessionStorage.removeItem("locale");
+        } else {
+            sessionStorage.setItem("locale", "en");
+        }
+        window.location.reload();
+    });
+
+    const authBtn = document.querySelector(".auth-btn")
+
+    authBtn.addEventListener("click", () =>{
+        if(userId){
+            sessionStorage.removeItem("userId")
+        }else{
+            sessionStorage.setItem("userId", "777777")
+        }
+        window.location.reload()
+    });
 
 })();

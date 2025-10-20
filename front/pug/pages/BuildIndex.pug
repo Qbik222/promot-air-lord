@@ -1,14 +1,22 @@
-
+button.menu-btn menu
+.menu-test
+    button.lng-btn en
+    button.auth-btn auth
 .fav-page.loading
     .spinner-overlay
         .spinner
     .welcome
         .welcome__left
-            picture.welcome__title
+            picture.welcome__title.uk
                 source(media="(max-width: 600px)" srcset='img/welcome/title-mob.png')
                 source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/title-mob.png')
                 source(media="(max-width: 1050px)" srcset='img/welcome/title.png')
                 img(src="img/welcome/title.png" alt="Favbet")
+            picture.welcome__title.en
+                source(media="(max-width: 600px)" srcset='img/welcome/title-mob-en.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/title-mob-en.png')
+                source(media="(max-width: 1050px)" srcset='img/welcome/title-en.png')
+                img(src="img/welcome/title-en.png" alt="Favbet")
             .welcome__amount
                 .welcome__amount-text.title(data-translate="welcomeAmount") #[span 600 000 ₴] #[span *]
                 .welcome__amount-hand
@@ -37,11 +45,16 @@
         .info__top(data-translate="infoTop") З 23 жовтня до 31 грудня ставки на баскетбольні події в межах турніру НБА відкривають шанс на частку від 600 000 ₴, бонусні пропозиції у вигляді «Страховки ставки» та додаткові призи.
         .info__title.title(data-transalte="infoTitle") Вищий <br/> коефіцієнт — більше
         .info__points
-            picture.info__points-text
+            picture.info__points-text.uk
                 source(media="(max-width: 600px)" srcset='img/info/points-mob.png')
                 source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/info/points-mob.png')
                 source(media="(max-width: 1050px)" srcset='img/info/points.png')
                 img(src="img/info/points.png" alt="Favbet")
+            picture.info__points-text.en
+                source(media="(max-width: 600px)" srcset='img/info/points-mob-en.png')
+                source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/info/points-mob-en.png')
+                source(media="(max-width: 1050px)" srcset='img/info/points-en.png')
+                img(src="img/info/points-en.png" alt="Favbet")
             picture.info__points-ball
                 source(media="(max-width: 600px)" srcset='img/welcome/ball-magenta-mob.png')
                 source(media="(max-width: 950px) and (max-width: 600px) and (orientation: landscape)" srcset='img/welcome/ball-magenta-mob.png')
