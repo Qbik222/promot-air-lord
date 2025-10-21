@@ -100,7 +100,7 @@
 
         function quickCheckAndRender() {
             checkUserAuth()
-                .then(loadUsers)
+                .then(() => loadUsers("?nocache=1"))
                 .then(() =>{
                     setTimeout(hideLoader, 300);
                     tabs.forEach(item => {
@@ -118,7 +118,9 @@
                             const tab = e.target.closest(".table__tabs-item")
                            const week = Number(tab.getAttribute('data-week'));
 
-                            if(week > activeWeek || week === activeWeek) return
+                            console.log(activeWeek)
+
+                            if(week > activeWeek) return
 
                            tabs.forEach(item => {
                                item.classList.remove('active')
