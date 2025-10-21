@@ -255,7 +255,7 @@
             return;
         }
 
-        const isStageEnded = userData.isStageEnded
+        const isStageEnded = weekObj.data.isStageEnded
 
         userData = weekObj.data.users;
 
@@ -319,7 +319,8 @@
             }
         }
         else {
-            secondTable.innerHTML = `<div class="table__row"> ${translateKey(isStageEnded ? "noWinnerHoodie" : "waitingWinnerHoodie")} </div>`
+            console.log(isStageEnded)
+            secondTable.innerHTML = `<div class="table__row table__row--noWinner"> ${translateKey(isStageEnded ? "noWinnerHoodie" : "waitingWinnerHoodie")} </div>`
         }
     }
 
